@@ -1,0 +1,21 @@
+{
+  "name": "notepad-api",
+  "version": "1.0.0",
+  "description": "Notepad app to store your notes",
+  "main": "notepad-api.js",
+  "private": true,
+  "author": "Daniel Munoz <daniel.munozdev@gmail.com>",
+  "scripts": {
+    "start": "node notepad-api.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.7",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
+  }
+}
