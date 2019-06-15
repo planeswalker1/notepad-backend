@@ -13,12 +13,18 @@ var userSchema = new Schema({
   token: String
 });
 
-// methods for validating password
+/**
+  compare pw with hash
+  @param {String} pw - password to compare
+  @param {Function} callback - function to call after comparing
+  @return {Function} - function call with err message or result of comparison
+*/
 userSchema.methods.comparePassword = function(pw, callback) {
 	bcrypt.compare(pw, this.hash, function(err, isMatch) {
-    console.log(pw, isMatch, "in compare password");
-    if (err) return callback(err);
-
+    // console.log(pw, isMatch, "in compare password");
+    if (err) {
+      return callback(err);
+    }
 		callback(null, isMatch);
 	});
 };
@@ -27,21 +33,26 @@ userSchema.pre('save', function(next) {
   // to hash pw need to set this to user
   let user = this;
 
-  if (!user.email) return next(new Error('Missing email'));
-  if (!user.hash) return next(new Error('Missing password'));
+  if (!user.email) {
+    return next(new Error('Missing email'));
+  }
+  if (!user.hash) {
+    return next(new Error('Missing password'));
+  }
   // dont hash pw if hashed
   if (!user.isModified('hash')) {
-    console.log('returned before hashing')
-    return next()
+    // console.log('returned before hashing');
+    return next();
   };
 
   // hash pw
   bcrypt.genSalt(config.saltRounds, function(err, salt) {
-    if (err) return console.log('error', err);
-
+    if (err) {
+      return console.log('error', err);
+    }
     bcrypt.hash(user.hash, salt, function(err, hash) {
         // Store hash in your password DB.
-        console.log('HASHED');
+        // console.log('HASHED');
         user.hash = hash;
         return next();
     });

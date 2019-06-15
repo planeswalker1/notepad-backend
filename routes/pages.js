@@ -7,8 +7,8 @@ const pages = require('../controllers/pages');
 const auths = require('../controllers/auths');
 
 router.param('id', (req, res, next, id) => {
-  console.log('param middleware ran');
-  console.log('incoming id', id, typeof id);
+  // console.log('param middleware ran');
+  // console.log('incoming id', id, typeof id);
   if (typeof Number(id) !== 'number')
     return res.status(400).send('Invalid Note');
   next();

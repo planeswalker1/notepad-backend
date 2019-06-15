@@ -17,8 +17,7 @@ var pageSchema = new Schema({
 
 pageSchema.pre('save', function (callback) {
   callback();
-  // TODO replace return and spaces with \n \s
-  // maybe dont have to and mongo takes care of it
+
 });
 
 var Page = mongoose.model('Page', pageSchema);
